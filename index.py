@@ -75,13 +75,13 @@ def show_svg(width, height, svg, color='None'):
 #    #ed = (255,0,0)    # color of our text
 #    #ext_pos = (10,10) # top-left position of our text
 #    #ext = "Hello World!" # text to draw
-#    # Now, we'll do the drawing: 
+#    # Now, we'll do the drawing:
 #    #raw.text(text_pos, text, fill=red)
 #    return Response(generate_image(width, height), mimetype='text')
-#    
+#
 #    # We need an HttpResponse object with the correct mimetype
 #    #response = HttpResponse(mimetype="image/png")
-#    # now, we tell the image to save as a PNG to the 
+#    # now, we tell the image to save as a PNG to the
 #    # provided file-like object
 #    #im.save(response, 'PNG')
 #    #return response
