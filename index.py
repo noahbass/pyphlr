@@ -1,6 +1,8 @@
-from flask import Flask, render_template, Response, json
+from flask import Flask, render_template, Response
 from flask_sslify import SSLify
-import png
+#from PIL import Image, ImageDraw
+#import base64
+#import io
 
 app = Flask(__name__)
 sslify = SSLify(app)
@@ -19,33 +21,73 @@ def show_image(width, height):
 
 @app.route('/<width>x<height>/<svg>/')
 @app.route('/<width>x<height>/<svg>')
-def show_svg(width, height, svg):
+@app.route('/<width>x<height>/<svg>/<color>/')
+@app.route('/<width>x<height>/<svg>/<color>')
+def show_svg(width, height, svg, color='None'):
+    chars = set('0123456789')
+
+    if any((char in chars) for char in color):
+        hexadecimal = True
+    else:
+        hexadecimal = False
+
     return Response(
-        render_template('svg.svg', width=width, height=height),
+        render_template('svg.svg', width=width, height=height, color=color, hexadecimal=hexadecimal),
         mimetype='image/svg+xml'
     )
 
 
-@app.route('/test')
-def show_test():
-    content = [
-        { 'param': 'foo' }
-    ]
-
-    return Response(json.dumps(content),  mimetype='image/gif')
-
-@app.route('/png')
-def show_png():
-    #f = open('ramp.png', 'wb')      # binary mode is important
-    #w = png.Writer(255, 1, greyscale=True)
-    #w.write(f, [range(256)])
-    #f.close()
+#@app.route('/png')
+#def show_png():
+#    code = base64.b64encode(open('./templates/image.png', 'rb').read())
+#    data = 'data:image/png;base64,'
+#    #encode('ascii')
+#    #img = code + data
+#    return Response(
+#        base64.b64encode(open('./templates/image.png', 'rb').read()),
+#        mimetype='text'
+#    )
+#    #return Response(data, mimetype='text')
+#    #, base64.b64encode(open('./image.png','rb').read())
 #
-    #return w.write(f, [range(256)])
-    return Response(png.from_array([[255, 0, 0, 255], [0, 255, 255, 0]], 'L'),  mimetype='image/png')
-    #return png.from_array([[255, 0, 0, 255], [0, 255, 255, 0]], 'L')
+#
+#def generate_image(width, height):
+#    width = int(width)
+#    height = int(height)
+#
+#    size = (width, height)             # size of the image to create
+#    im = Image.new('RGB', size) # create the image
+#    draw = ImageDraw.Draw(im)
+#
+#    del draw
+#
+#    #return im.show('test.png')
+#    #return im.show('img.png', 'PNG')
+#    img = im.show('test.png')
+#
+#    #return img
+#
+#    return base64.b64encode(open(img, 'rb').read())
+#
+#
+#@app.route('/test/<width>x<height>')
+#def show_test(width, height):
+#    #ed = (255,0,0)    # color of our text
+#    #ext_pos = (10,10) # top-left position of our text
+#    #ext = "Hello World!" # text to draw
+#    # Now, we'll do the drawing: 
+#    #raw.text(text_pos, text, fill=red)
+#    return Response(generate_image(width, height), mimetype='text')
+#    
+#    # We need an HttpResponse object with the correct mimetype
+#    #response = HttpResponse(mimetype="image/png")
+#    # now, we tell the image to save as a PNG to the 
+#    # provided file-like object
+#    #im.save(response, 'PNG')
+#    #return response
+#    #
 
 
 if __name__ == '__main__':
-    app.debug = True
+    app.debug = False
     app.run(host = 'localhost', port = 5000)

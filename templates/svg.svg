@@ -1,2 +1,12 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<svg width="{{ width }}px" height="{{ height }}px" viewBox="0 0 {{ width }} {{ height }}" xmlns="http://www.w3.org/2000/svg"><rect fill="#D8D8D8" width="{{ width }}" height="{{ height }}"/></svg>
+<svg width="{{ width }}px" height="{{ height }}px" viewBox="0 0 {{ width }} {{ height }}" xmlns="http://www.w3.org/2000/svg">
+    {% if color != 'None' %}
+        {% if hexadecimal %}
+            <rect fill="#{{ color }}" width="{{ width }}" height="{{ height }}"/>
+        {% else %}
+            <rect fill="{{ color }}" width="{{ width }}" height="{{ height }}"/>
+        {% endif %}
+    {% else %}
+    <rect fill="#D8D8D8" width="{{ width }}" height="{{ height }}"/>
+    {% endif %}
+</svg>
