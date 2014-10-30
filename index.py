@@ -1,11 +1,11 @@
 from flask import Flask, render_template, Response
-from flask_sslify import SSLify
+#from flask_sslify import SSLify
 #from PIL import Image, ImageDraw
 #import base64
 #import io
 
 app = Flask(__name__)
-sslify = SSLify(app)
+#sslify = SSLify(app)
 
 
 @app.route('/')
