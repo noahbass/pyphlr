@@ -22,15 +22,8 @@ def show_image(width, height):
 @app.route('/<width>x<height>/<svg>/<color>/')
 @app.route('/<width>x<height>/<svg>/<color>')
 def show_svg(width, height, svg, color='None'):
-    chars = set('0123456789')
-
-    if any((char in chars) for char in color):
-        hexadecimal = True
-    else:
-        hexadecimal = False
-
     return Response(
-        render_template('svg.svg', width=width, height=height, color=color, hexadecimal=hexadecimal),
+        render_template('svg.svg', width=width, height=height, color=color),
         mimetype='image/svg+xml'
     )
 
