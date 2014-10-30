@@ -5,7 +5,7 @@ from flask_sslify import SSLify
 #import io
 
 app = Flask(__name__)
-#sslify = SSLify(app)
+sslify = SSLify(app)
 
 
 @app.route('/')
