@@ -1,4 +1,4 @@
-from flask import Flask, render_template, Response, send_file
+from flask import Flask, render_template, Response
 from PIL import Image, ImageDraw
 from io import BytesIO
 import os
@@ -52,7 +52,7 @@ def generate_image(width, height='None', color='None'):
     im.save(img, 'PNG')
     img.seek(0)
 
-    return send_file(img, mimetype='image/png')
+    return Response(img, mimetype='image/png')
 
 
 @app.route('/<width>x<height>/svg/')
