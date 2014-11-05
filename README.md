@@ -2,4 +2,4 @@
 
 a small, experimental image placeholder service built on python
 
-svg generation is live, png generation is coming soon
+handles both png and svg generation - png color option is coming soon
