@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <svg width="{{ width }}px" height="{{ height }}px" viewBox="0 0 {{ width }} {{ height }}" xmlns="http://www.w3.org/2000/svg">
     {% if color != 'None' %}
+        <title>{{ color }} ({{ width }}×{{ height }})</title>
         <rect fill="#{{ color }}" width="{{ width }}" height="{{ height }}"/>
     {% else %}
+        <title>{{ width }}x{{ height }} ({{ width }}×{{ height }})</title>
         <rect fill="#D8D8D8" width="{{ width }}" height="{{ height }}"/>
     {% endif %}
 </svg>
