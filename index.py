@@ -22,9 +22,13 @@ def index():
 
 @app.route('/<width>x<height>/')
 @app.route('/<width>x<height>')
+@app.route('/<width>x<height>/<color>/')
+@app.route('/<width>x<height>/<color>')
 @app.route('/<width>/')
 @app.route('/<width>')
-def generate_image(width, height='None'):
+@app.route('/<width>/<color>/')
+@app.route('/<width>/<color>')
+def generate_image(width, height='None', color='None'):
     width = int(width)
 
     if height == 'None':
@@ -32,8 +36,15 @@ def generate_image(width, height='None'):
     else:
         height = int(height)
 
-    size = (width, height)             # size of the image to create
-    im = Image.new('RGB', size) # create the image
+    size = (width, height)
+
+    if color == 'None':
+        im = Image.new('RGB', size, (216, 216, 216))
+    else:
+        length = len(color)
+        color = tuple(int(color[i:i + length // 3], 16) for i in range(0, length, length // 3))
+        im = Image.new('RGB', size, color)
+
     draw = ImageDraw.Draw(im)
 
     del draw
@@ -49,7 +60,14 @@ def generate_image(width, height='None'):
 @app.route('/<width>x<height>/svg')
 @app.route('/<width>x<height>/svg/<color>/')
 @app.route('/<width>x<height>/svg/<color>')
-def show_svg(width, height, color='None'):
+@app.route('/<width>/svg/')
+@app.route('/<width>/svg')
+@app.route('/<width>/svg/<color>/')
+@app.route('/<width>/svg/<color>')
+def show_svg(width, height='None', color='None'):
+    if height == 'None':
+        height = width
+
     return Response(
         render_template('svg.svg', width=width, height=height, color=color),
         mimetype='image/svg+xml'
@@ -57,5 +75,4 @@ def show_svg(width, height, color='None'):
 
 
 if __name__ == '__main__':
-    app.debug = False
     app.run(host = 'localhost', port = 5000)
