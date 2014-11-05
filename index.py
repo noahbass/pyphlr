@@ -45,11 +45,11 @@ def generate_image(width, height='None'):
     return send_file(img, mimetype='image/png')
 
 
-@app.route('/<width>x<height>/<svg>/')
-@app.route('/<width>x<height>/<svg>')
-@app.route('/<width>x<height>/<svg>/<color>/')
-@app.route('/<width>x<height>/<svg>/<color>')
-def show_svg(width, height, svg, color='None'):
+@app.route('/<width>x<height>/svg/')
+@app.route('/<width>x<height>/svg')
+@app.route('/<width>x<height>/svg/<color>/')
+@app.route('/<width>x<height>/svg/<color>')
+def show_svg(width, height, color='None'):
     return Response(
         render_template('svg.svg', width=width, height=height, color=color),
         mimetype='image/svg+xml'
