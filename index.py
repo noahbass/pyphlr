@@ -41,8 +41,7 @@ def generate_image(width, height='None', color='None'):
     if color == 'None':
         im = Image.new('RGB', size, (216, 216, 216))
     else:
-        length = len(color)
-        color = tuple(int(color[i:i + length // 3], 16) for i in range(0, length, length // 3))
+        color = '#' + color
         im = Image.new('RGB', size, color)
 
     draw = ImageDraw.Draw(im)
