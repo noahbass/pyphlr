@@ -23,6 +23,10 @@
                     <!-- <p class="lead">a small, experimental image placeholder service built on python</p> -->
 
                     {% block content %}{% endblock %}
+
+                    <footer role="contentinfo">
+                        <p><small>lastest build: <a href="//github.com/noahbass/pyphlr/commit/{{ config.hash }}">{{ config.hash }}</a></small></p>
+                    </footer>
                 </div>
             </div>
         </div>
